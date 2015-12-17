@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE rca SYSTEM "../devicefile.dtd">
+<rca version="1.0">
+  <!-- WARNING: This file is generated automatically, do not edit!
+ 		Please modify the xpcc/tools/device_file_generator code instead and rebuild this file.
+ 		Be aware, that regenerated files might have a different composition due to technical reasons. -->
+  <device platform="generic" family="cortex-m4f">
+    <core>cortex-m4f</core>
+  </device>
+</rca>
