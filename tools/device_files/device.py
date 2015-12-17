@@ -150,6 +150,12 @@ class DeviceFile:
 				self.log.error("Unknown family '%s' for platform %s."
 				" Valid families for this platform are: %s" %
 				(self.family, self.platform, families))
+		elif self.platform == 'generic':
+			families = ['cortex-m4f']
+			if self.family not in families:
+				self.log.error("Unknown family '%s' for platform %s."
+				" Valid families for this platform are: %s" %
+				(self.family, self.platform, families))
 		elif self.platform == 'hosted':
 			families = ['linux', 'darwin', 'windows']
 			if self.family not in families:
@@ -178,13 +184,14 @@ class DeviceFile:
 		props['defines'] = self.getProperty('define', device_string)
 		props['headers'] = self.getProperty('header', device_string)
 
-		if s.platform != 'hosted':
+		if not s.platform in ['hosted']:
+			props['core'] = self.getProperty('core', device_string, True)[0]
+			props['mcu'] = self.getProperty('mcu', device_string, True, "")[0]
+		if not s.platform in ['hosted', 'generic']:
 			props['flash'] = self.getProperty('flash', device_string, True)[0]
 			props['ram'] = self.getProperty('ram', device_string, True)[0]
 			props['eeprom'] = self.getProperty('eeprom', device_string, True, 0)[0]
-			props['mcu'] = self.getProperty('mcu', device_string, True, "")[0]
 			props['linkerscript'] = self.getProperty('linkerscript', device_string, True, "")[0]
-			props['core'] = self.getProperty('core', device_string, True)[0]
 		props.update(s.getTargetDict())
 
 		#Check Some Properties

@@ -67,7 +67,7 @@ def platform_tools_find_device_file(env):
 	files = []
 	device_file = None
 
-	if id.platform == 'hosted':
+	if id.platform == 'hosted' or id.platform == 'generic':
 		file = os.path.join(xml_path, id.family + '.xml')
 		if os.path.exists(file):
 			device_file = file
@@ -158,7 +158,7 @@ def platform_tools_generate(env, architecture_path):
 	defines = prop['defines']
 	device_headers = prop['headers']
 
-	if device not in ['darwin', 'linux', 'windows']:
+	if device not in ['darwin', 'linux', 'windows'] and not device.startswith('generic'):
 		# Set Size
 		env['DEVICE_SIZE'] = { "flash": prop['flash'], "ram": prop['ram'], "eeprom": prop['eeprom'] }
 		if (prop['linkerscript'] != ""):
