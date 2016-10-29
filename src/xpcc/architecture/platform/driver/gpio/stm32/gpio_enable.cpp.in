@@ -31,21 +31,26 @@ xpcc_gpio_enable(void)
 %% endfor
 
 	// Reset GPIO peripheral
+	// GPIOB is excluded because resetting it interferes with ETM tracing
 	RCC->{{ clock_tree }}RSTR |=
 %% for port in gpios|xpcc.values('port')|sort
+%% if not port == 'B'
 %%	if not loop.last
 		RCC_{{ clock_tree }}RSTR_GPIO{{ port }}RST |
 %%	else
 		RCC_{{ clock_tree }}RSTR_GPIO{{ port }}RST;
 %%	endif
+%% endif
 %% endfor
 
 	RCC->{{ clock_tree }}RSTR &= ~(
 %% for port in gpios|xpcc.values('port')|sort
+%% if not port == 'B'
 %%	if not loop.last
 		RCC_{{ clock_tree }}RSTR_GPIO{{ port }}RST |
 %%	else
 		RCC_{{ clock_tree }}RSTR_GPIO{{ port }}RST);
 %%	endif
+%% endif
 %% endfor
 }
