@@ -120,7 +120,7 @@ def generate(env, **kw):
 	
 	# flags for C and C++
 	env['CCFLAGS'] = [
-		"-mcpu=$ARM_ARCH",
+		"-mcpu=cortex-m0",
 		"$FPU",
 		"$THUMB",			# use THUMB='-mthumb' to compile as thumb code (default for AT91SAM)
 		"-mthumb-interwork",
