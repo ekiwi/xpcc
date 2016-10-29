@@ -99,7 +99,7 @@ def generate(env, **kw):
 		# - soft: Full software floating point.
 		# - softfp: Use the FPU, but remain compatible with soft-float code.
 		# - hard: Full hardware floating point. Needs support from libc. 
-		env['FPU'] = '-mfloat-abi=softfp -mfpu=fpv4-sp-d16'
+		env['FPU'] = '-mfloat-abi=soft'
 
 	# Single precision float support
 	# PM0253 4.7: "The Cortex-M7 Floating-Point Unit (FPU) implements the FPv5 floating-point extensions."
